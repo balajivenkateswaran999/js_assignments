@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+    <style>
+        
+        
+    </style>
+    <script>
+        var sum=0;
+        function quantity(){
+            var x=document.getElementById("qun").value;
+           
+            var price=document.getElementById("price").innerHTML;
+            
+            var y=x*price;
+           
+            document.getElementById("price").innerHTML=y;
+        }
+        function remove(){
+            var x=document.getElementById("proc1");
+            x.parentNode.removeChild(x);
+        }
+        function send(){
+            var x=document.getElementById("proc2");
+            var table=document.getElementById("table");
+            var pname=document.getElementById("name").value;
+            var quantity=document.getElementById("qun1").value;
+            var price=document.getElementById("price1").value;
+            var total=quantity*price;
+            sum=sum+total;
+            document.getElementById("total").innerHTML=total;
+            
+            var len=document.getElementById("detail").elements.length;
+                var trow=document.createElement("tr");
+                //trow.setAttribute("id","trowid");
+                var tdata1=document.createElement("td");
+                var tdata2=document.createElement("td");
+                var tdata3=document.createElement("td");
+                var tdata4=document.createElement("td");
+                var tdata5=document.createElement("td"); 
+                var tdata6=document.createElement("td");
+                var text1=document.createTextNode(pname);
+                var text2=document.createTextNode(quantity);
+                var text3=document.createTextNode(price);
+                var text4=document.createTextNode(total);
+                var text5=document.createTextNode(sum);
+                var t4=document.createElement("button");
+                var delete1=document.createTextNode("DELETE");
+                tdata1.appendChild(text1);
+                tdata2.appendChild(text2);
+                tdata3.appendChild(text3);
+                tdata4.appendChild(text4);
+                tdata5.appendChild(t4);
+                tdata6.appendChild(text5);
+                t4.appendChild(delete1);
+                trow.appendChild(tdata1);
+                trow.appendChild(tdata2);
+                trow.appendChild(tdata3);
+                trow.appendChild(tdata4);
+                trow.appendChild(tdata5);
+                trow.appendChild(tdata6);
+                table.appendChild(trow);
+            x.appendChild(table);
+            table.style.borderBottom="#f1f1f1 solid"
+            table.className="tb";
+            t4.onclick = function(){
+                table.removeChild(trow);
+            };
+            
+        }
+        
+        
+    </script>
+    <style>
+        .tb{
+            border-spacing: 20px;
+            padding: 10px;
+            color:maroon;
+            background: khaki;
+            font-weight: bold;
+        }
+        .zoom{
+            -webkit-transform:scale(4,4);
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Cart Page</h1>
+        <div id="proc1">
+            <img src="moto.jpeg" id="img1" onmouseover="zoom()">
+            <p>Motorola Moto E3 Power Black</p>
+            <form><label>Quantity</label><input type="text" id="qun" onblur="quantity()"></form>
+            <p id="price">7888</p>
+            <button onclick="remove()">Remove</button>
+            
+        </div>
+        <div id="details">
+            <form  id="detail">
+                <label>Product Name</label><input type="text" id="name" placeholder="Product name" >
+                <label>Quantity</label><input type="text" id="qun1" >
+                <label>Price</label><input type="text" id="price1">
+            </form>
+            <span id="total"></span>
+            <button onclick="send()">ADD</button>
+        </div>
+        <div id="proc2">
+            <table id="table"></table>
+        </div>
+    </div>
+</body>
+</html>

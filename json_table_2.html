@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="angular.min.js"></script>
+        <script>
+            var app=angular.module("app",[]);
+            app.controller("dataController",function($scope,$http){
+                $http.get("data.json").then(function(response){
+                    $scope.data=response.data;
+                    $scope.data_display=$scope.data;
+                    console.log($scope.data);
+                });
+                $scope.delete=function(id){
+                    console.log(id);
+                    var myArr=$scope.data;
+                    var index=-1;
+                    var flag=false;
+                    for(var i=0;i<myArr.length;i++){
+                        if(myArr[i].empId==id){
+                            
+                            index=i;
+                            flag=true;
+                            break;
+                        }
+                    }
+                    if(flag){
+                        $scope.data.splice(index,1);
+                    } 
+                }
+                $scope.edit=function(){
+                    
+                }
+               
+            });
+        </script>
+    </head>
+    <body ng-app="app" ng-controller="dataController">
+        <div>
+            
+        </div>
+        <div>
+            <h1>Employee Information</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Employee ID</th>
+                        <th>Department</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="x1 in data">
+                    <td>{{x1.firstName}}</td>
+                    <td>{{x1.lastName}}</td>
+                    <td>{{x1.empId}}</td>
+                    <td>{{x1.department}}</td>
+                </tr>   
+                </tbody>
+            </table>
+            <input type="text" ng-model="empId">
+             <button ng-click="edit()">EDIT</button>
+            <button ng-click="delete(empId)">DELETE</button>
+            <button>SAVE</button>
+           `<table>
+                <thead>
+                    <tr>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Employee ID</th>
+                        <th>Department</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="x1 in data_display">
+                    <td>{{x1.firstName}}</td>
+                    <td>{{x1.lastName}}</td>
+                    <td>{{x1.empId}}</td>
+                    <td>{{x1.department}}</td>
+                </tr>   
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
